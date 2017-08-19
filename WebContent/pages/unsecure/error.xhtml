@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>BNA Module EE</title>
+	</f:facet>
+
+	<f:facet name="middle">
+		<link rel="shortcut icon" href="#{resource['img/bna3.png']}" />
+		<h:outputStylesheet name="css/lib/bootstrap.css" />
+		<h:outputStylesheet name="css/error.css" />
+	</f:facet>
+
+	<f:facet name="last">
+		<h:outputStylesheet name="css/lib/font-awesome.css" />
+	</f:facet>
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="error-template ">
+			<p:panel header="Oops!" footer="BNA - Copyright © 2016">
+				<p:messages />
+				<div class="ui-fluid">
+					<p:panelGrid columns="2"
+						columnClasses="ui-grid-col-10,ui-grid-col-2" layout="grid"
+						styleClass="ui-panelgrid-blank">
+						<h:outputText
+							value="Désolé, une erreur est survenue, la page demandée non trouvée!" />
+						<i class="fa fa-3x fa-frown-o" aria-hidden="true"></i>
+						<p:button value="Page d'acceuil" outcome="../secure/index.xhtml"
+							icon="ui-icon-home">
+						</p:button>
+					</p:panelGrid>
+				</div>
+			</p:panel>
+		</div>
+	</div>
+</h:body>
+</html>

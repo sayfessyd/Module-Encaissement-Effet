@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="content">
+			#{EffetCtrl.lazyModel.setEtatListEffet('I')}
+			<h1 class="page-header">
+				<i class="fa fa-check"></i> Validation
+				remise encaissement
+			</h1>
+			<p:panel id="choixRech" header="Choix Recherche"
+				collapsed="#{EffetCtrl.numDisabled or ContratCtrl.inputDisabled or EffetCtrl.selectedEffet != null}"
+				toggleable="true">
+				<h:form>
+					<div class="ui-fluid">
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-2,ui-grid-col-10" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<p:outputLabel for="radio" value="Recherche par" />
+							<p:selectOneRadio id="radio" layout="responsive" columns="3"
+								value="#{EffetCtrl.modeRech}"
+								disabled="#{EffetCtrl.numDisabled or ContratCtrl.inputDisabled or EffetCtrl.selectedEffet != null}">
+								<f:selectItem itemLabel="Numéro de compte" itemValue="C" />
+								<f:selectItem itemLabel="Numéro de remise" itemValue="R" />
+								<f:selectItem itemLabel="Toutes les remises" itemValue="L" />
+								<p:ajax event="valueChange" update="critereRech"
+									immediate="true" />
+							</p:selectOneRadio>
+						</p:panelGrid>
+					</div>
+				</h:form>
+			</p:panel>
+			<br></br>
+			<p:panel id="critereRech" header="Critère de Recherche"
+				collapsed="#{EffetCtrl.numDisabled or EffetCtrl.selectedEffet != null or EffetCtrl.modeRech == null}"
+				toggleable="true">
+				<!-- par remise  -->
+				<h:form rendered="#{EffetCtrl.modeRech == 'R'}">
+					<div class="ui-fluid">
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid" styleClass="ui-panelgrid-blank">
+							<p:outputLabel for="num" value="Numéro de Remise" />
+							<p:inputText id="num" value="#{EffetCtrl.num}"
+								disabled="#{EffetCtrl.numDisabled}" required="true" />
+							<p:commandButton value="Chercher"
+								actionListener="#{EffetCtrl.chercherEffet}"
+								update="detailsEffet growl critereRech choixRech"
+								icon="ui-icon-search" disabled="#{EffetCtrl.numDisabled}" />
+						</p:panelGrid>
+					</div>
+				</h:form>
+				<!-- par compte  -->
+				<h:form rendered="#{EffetCtrl.modeRech == 'C'}">
+					<div class="ui-fluid">
+						<p:panelGrid columns="3"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid" styleClass="ui-panelgrid-blank"
+							rendered="#{!ContratCtrl.inputDisabled}">
+							<p:outputLabel for="num" value="Numéro de Compte" />
+							<p:inputText id="num" value="#{ContratCtrl.input}"
+								disabled="#{ContratCtrl.inputDisabled}" required="true" />
+							<p:commandButton value="Chercher"
+								actionListener="#{ContratCtrl.afficherInfoPersonne}"
+								update="detailsEffet growl critereRech choixRech"
+								icon="ui-icon-search" disabled="#{ContratCtrl.inputDisabled}">
+								<f:actionListener binding="#{EffetCtrl.afficheParCpt()}" />
+							</p:commandButton>
+						</p:panelGrid>
+					</div>
+					<p:dataTable id="effetTableA" var="effet"
+						value="#{EffetCtrl.lazyModel}" paginator="true" rows="10"
+						paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink} {Exporters}"
+						selectionMode="single" selection="#{EffetCtrl.selectedEffet}"
+						lazy="true" reflow="true" emptyMessage="Aucune données trouvées"
+						rendered="#{ContratCtrl.inputDisabled and EffetCtrl.selectedEffet == null}">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage name="img/excel.png" />
+								<p:dataExporter type="xls" target="effetTableA"
+									fileName="BNA_ModuleEE_Liste" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage name="img/pdf.png" />
+								<p:dataExporter type="pdf" target="effetTableA"
+									fileName="BNA_ModuleEE_Liste" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage name="img/csv.png" />
+								<p:dataExporter type="csv" target="effetTableA"
+									fileName="BNA_ModuleEE_Liste" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage name="img/xml.png" />
+								<p:dataExporter type="xml" target="effetTableA"
+									fileName="BNA_ModuleEE_Liste" />
+							</h:commandLink>
+						</f:facet>
+						<p:ajax event="rowSelect" listener="#{EffetCtrl.selectEffet}"
+							update="detailsEffet critereRech choixRech" />
+						<p:column headerText="N° effet" sortBy="#{effet.numEff}">
+							<h:outputText value="#{effet.numEff}" />
+						</p:column>
+						<p:column headerText="Montant" sortBy="#{effet.mntEff}">
+							<h:outputText value="#{effet.mntEff}" />
+						</p:column>
+						<p:column headerText="Echéance" sortBy="#{effet.datEch}">
+							<h:outputText
+								value="#{LoginCtrl.getDateFormat().format(effet.datEch)}" />
+						</p:column>
+						<p:column headerText="RIB tiré" sortBy="#{effet.ribTir}">
+							<h:outputText value="#{effet.ribTir}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<!-- par liste  -->
+				<h:form
+					rendered="#{EffetCtrl.modeRech == 'L' and EffetCtrl.selectedEffet == null}">
+					<p:dataTable id="effetTableB" var="effet"
+						value="#{EffetCtrl.lazyModel}" paginator="true" rows="10"
+						paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink} {Exporters}"
+						selectionMode="single" selection="#{EffetCtrl.selectedEffet}"
+						lazy="true" reflow="true" emptyMessage="Aucune données trouvées">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage name="img/excel.png" />
+								<p:dataExporter type="xls" target="effetTableB"
+									fileName="effets" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage name="img/pdf.png" />
+								<p:dataExporter type="pdf" target="effetTableB"
+									fileName="effets" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage name="img/csv.png" />
+								<p:dataExporter type="csv" target="effetTableB"
+									fileName="effets" />
+							</h:commandLink>
+							<h:commandLink>
+								<p:graphicImage name="img/xml.png" />
+								<p:dataExporter type="xml" target="effetTableB"
+									fileName="effets" />
+							</h:commandLink>
+						</f:facet>
+						<p:ajax event="rowSelect" listener="#{EffetCtrl.selectEffet}"
+							update="detailsEffet critereRech choixRech" />
+						<p:column headerText="N° effet" sortBy="#{effet.numEff}">
+							<h:outputText value="#{effet.numEff}" />
+						</p:column>
+						<p:column headerText="N° compte client" sortBy="#{effet.contratCpt}">
+							<h:outputText
+								value="#{effet.contratCpt.contratCptId.compteClient}" />
+						</p:column>
+						<p:column headerText="Montant" sortBy="#{effet.mntEff}">
+							<h:outputText value="#{effet.mntEff}" />
+						</p:column>
+						<p:column headerText="Echéance" sortBy="#{effet.datEch}">
+							<h:outputText
+								value="#{LoginCtrl.getDateFormat().format(effet.datEch)}" />
+						</p:column>
+						<p:column headerText="RIB tiré" sortBy="#{effet.ribTir}">
+							<h:outputText value="#{effet.ribTir}" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+			<br></br>
+			<p:panel id="detailsEffet" header="Données Remise"
+				collapsed="#{!EffetCtrl.numDisabled and EffetCtrl.selectedEffet == null}"
+				toggleable="true">
+				<h:form>
+					<div class="ui-fluid">
+						<p:panelGrid columns="4"
+							columnClasses="ui-grid-col-3,ui-grid-col-3,ui-grid-col-3,ui-grid-col-3"
+							layout="grid" styleClass="ui-panelgrid-blank">
+							<p:outputLabel for="rib" value="RIB Tiré" />
+							<p:inputText id="rib" value="#{EffetCtrl.rib}" disabled="true"
+								required="true" maxlength="20">
+								<p:ajax event="blur" update="nom adr growl"
+									listener="#{EffetCtrl.verifierRibBna}" />
+							</p:inputText>
+							<p:outputLabel for="nom" value="Nom du
+								tiré" />
+							<p:inputText id="nom" value="#{EffetCtrl.nom}" disabled="true" />
+							<p:outputLabel for="dateE" value="Date Echéance" />
+							<p:calendar id="dateE" value="#{EffetCtrl.dateE}"
+								pattern="MM/dd/yyyy HH:mm:ss" disabled="true" required="true" />
+							<p:outputLabel for="dateC" value="Date Création" />
+							<p:calendar id="dateC" value="#{EffetCtrl.dateC}"
+								pattern="MM/dd/yyyy HH:mm:ss" disabled="true" required="true" />
+							<p:outputLabel for="adr" value="Adresse du Tiré" />
+							<p:inputText id="adr" value="#{EffetCtrl.adr}" disabled="true" />
+							<p:outputLabel for="mont" value="Montant de l'Effet" />
+							<p:inputText id="mont" value="#{EffetCtrl.mont}" disabled="true"
+								required="true" />
+							<p:outputLabel for="montG" value="Montant Global" />
+							<p:inputText id="montG" value="#{EffetCtrl.montG}"
+								required="true" disabled="true" />
+							<p:outputLabel for="nbr" value="Nombre d'Effets" />
+							<p:inputText id="nbr" value="#{EffetCtrl.nbr}" required="true"
+								disabled="true" />
+							<p:commandButton value="Valider"
+								action="#{EffetCtrl.validerEffet}" icon="ui-icon-check"
+								update="growl" />
+						</p:panelGrid>
+					</div>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

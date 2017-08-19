@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="content">
+			<h1 class="page-header">
+				<i class="fa fa-share"></i> PEC global remise
+			</h1>
+			<p:panel id="detailG" header="Détails Global Remise">
+				<h:form>
+					<div class="ui-fluid">
+						<p:panelGrid columns="2"
+							columnClasses="ui-grid-col-3,ui-grid-col-3" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<p:outputLabel for="nbr" value="Nombre d'effets" />
+							<p:inputText id="nbr" value="#{EffetCtrl.nbr}" required="true" />
+							<p:outputLabel for="montG" value="Montant global" />
+							<p:inputText id="montG" value="#{EffetCtrl.montG}"
+								required="true" />
+							<p:commandButton value="Enregistrer"
+								action="#{EffetCtrl.ajouterRemise}" icon="ui-icon-disk"
+								update="growl" />
+						</p:panelGrid>
+					</div>
+				</h:form>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

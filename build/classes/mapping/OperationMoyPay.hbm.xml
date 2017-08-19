@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.OperationMoyPay" rowid="rowid"
+		table="OPERATION_MOY_PAY">
+		<id name="numOperOmp" type="java.lang.Long">
+			<column length="13" name="NUM_OPER_OMP" />
+			<generator class="increment" />
+		</id>
+		<many-to-one class="com.pfe.model.Personnel" fetch="select"
+			name="personnelValideur">
+			<column length="10" name="NUM_MATV_USER" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.Personnel" fetch="select"
+			name="personnelInitiateur">
+			<column length="10" name="NUM_MATR_USER" not-null="true" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.TypePiece" fetch="select"
+			name="typePieceDemandeur">
+			<column name="COD_DEM_TPCE" not-null="false" precision="2"
+				scale="0" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.ContratCpt"
+			fetch="select" name="contratCpt">
+			<column name="NUM_CCPT_CCPT" not-null="true" precision="6"
+				scale="0" />
+			<column name="COD_STRC_STRC" not-null="true" precision="3"
+				scale="0" />
+			<column name="COD_PRD_PRD" not-null="true" precision="4"
+				scale="0" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.Devise" fetch="select"
+			name="devise">
+			<column name="COD_DEV_DEV" not-null="false" precision="3"
+				scale="0" />
+		</many-to-one>
+		<set name="detailOperMoyPaiements" table="DETAIL_OPER_MOY_PAIEMENT" lazy="false" fetch="join">
+            <key>
+                <column name="NUM_COD_DOMP" precision="10" scale="0" />
+            </key>
+            <one-to-many class="com.pfe.model.DetailOperMoyPaiement" />
+        </set>
+		<property name="datOperOmp" type="java.util.Date">
+			<column length="7" name="DAT_OPER_OMP" not-null="true" />
+		</property>
+		<property name="numPcedOmp" type="java.lang.String">
+			<column length="13" name="NUM_PCED_OMP" not-null="false" />
+		</property>
+		<property name="codEtatOmp" type="java.lang.String">
+			<column length="1" name="COD_ETAT_OMP" not-null="true" />
+		</property>
+		<property name="codSensOmp" type="java.lang.String">
+			<column length="1" name="COD_SENS_OMP" not-null="true" />
+		</property>
+		<property name="montDinOmp" type="java.lang.Long">
+			<column name="MONT_DIN_OMP" precision="15" scale="0" />
+		</property>
+		<property name="nomNomdOmp" type="java.lang.String">
+			<column length="60" name="NOM_NOMB_OMP" />
+		</property>
+		<property name="nomPrndOmp" type="java.lang.String">
+			<column length="60" name="NOM_PRNB_OMP" />
+		</property>
+		<property name="montDevOmp" type="java.lang.Long">
+			<column name="MONT_DEV_OMP" precision="15" scale="0" />
+		</property>
+		<property name="libMotfOmp" type="java.lang.String">
+			<column length="100" name="LIB_MOTF_OMP" />
+		</property>
+		<property name="montTvaOmp" type="java.lang.Long">
+			<column name="MONT_TVA_OMP" precision="15" scale="0" />
+		</property>
+		<property name="datSystOmp" type="java.util.Date">
+			<column length="7" name="DAT_SYST_OMP" not-null="false" />
+		</property>
+		<property name="montApreOmp" type="java.lang.Long">
+			<column name="MONT_APRE_OMP" precision="15" />
+		</property>
+		<property name="montDevApreOmp" type="java.lang.Long">
+			<column name="MONTD_APRE_OMP" precision="15" />
+		</property>
+		<property name="montSoldCcpt" type="java.lang.Long">
+			<column name="MONT_SOLD_CCPT" precision="15" />
+		</property>
+		<property name="montSdevCcpt" type="java.lang.Long">
+			<column name="MONT_SDEV_CCPT" precision="15" />
+		</property>
+		<property name="codRefCfOmp" type="java.lang.String">
+			<column length="20" name="REF_COF_OMP" />
+		</property>
+		<many-to-one class="com.pfe.model.Operation" fetch="join"
+			name="operation" lazy="false">
+			<column name="COD_OPER_OPER" precision="5" scale="0" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

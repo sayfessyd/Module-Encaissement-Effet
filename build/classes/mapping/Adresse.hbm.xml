@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Adresse" rowid="rowid" table="ADRESSE">
+		<id name="numSeqAdr" type="java.lang.Long">
+			<column name="NUM_SEQ_ADR" precision="15" scale="0" />
+			<generator class="increment" />
+		</id>
+		<property name="immeuble" type="java.lang.String">
+			<column name="ADR_IMM_PERS" length="60" />
+		</property>
+		<property name="rue" type="java.lang.String">
+			<column name="ADR_RUE_PERS" length="60" />
+		</property>
+		<property name="cite" type="java.lang.String">
+			<column name="ADR_CIT_PERS" length="60" />
+		</property>
+		<property name="ville" type="java.lang.String">
+			<column name="ADR_VIL_PERS" length="60" />
+		</property>
+		<property name="codCpCp" type="java.lang.String">
+			<column name="ADR_CP_PERS" length="60" />
+		</property>
+		<property name="codPaysPays" type="java.lang.String">
+			<column name="COD_ADR_PAYS" length="60" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+body {
+	background: url("#{resource['img/backBlur2.jpg']}") no-repeat fixed;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	overflow-x: hidden;
+	min-height: 100%;
+	
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.form-signin {
+	max-width: 460px;
+	padding: 15px;
+	margin: 0 auto;
+	opacity: 0.95;
+}
+
+.ui-panel {
+	box-shadow: rgba(0, 0, 0, 0.45098) 0 2px 10px 0;
+}
+
+:focus {
+	outline-color: #327e04 !important;
+}

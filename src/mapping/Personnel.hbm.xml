@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Personnel" table="PERSONNEL"
+		rowid="rowid">
+		<id name="numMatrUser" type="java.lang.String">
+			<column name="NUM_MATR_USER" length="10" />
+			<generator class="assigned" />
+		</id>
+		<many-to-one name="structure" class="com.pfe.model.Structure"
+			fetch="join">
+			<column name="COD_STRC_STRC" precision="3" scale="0" not-null="true" />
+		</many-to-one>
+		<property name="codStatUser" type="java.lang.Long">
+			<column name="COD_STAT_USER" precision="1" scale="0" />
+		</property>
+		<property name="numCinUser" type="java.lang.String">
+			<column name="NUM_CIN_USER" length="10" />
+		</property>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>BNA Module EE</title>
+	</f:facet>
+
+	<f:facet name="middle">
+		<link rel="shortcut icon" href="#{resource['img/bna3.png']}" />
+		<h:outputStylesheet name="css/lib/bootstrap.css" />
+		<h:outputStylesheet name="css/signin.css" />
+	</f:facet>
+
+	<f:facet name="last">
+		<h:outputStylesheet name="css/lib/font-awesome.css" />
+	</f:facet>
+</h:head>
+<h:body>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="img/ajaxloadingbar.gif" />
+	</p:dialog>
+	<div class="container">
+		<h:form id="loginForm" class="form-signin">
+			<p:panel header="Veuillez s'authentifier"
+				footer="BNA - Copyright © 2016">
+				<div class="ui-fluid">
+					<p:panelGrid columns="2"
+						columnClasses="ui-grid-col-5,ui-grid-col-7" layout="grid"
+						styleClass="ui-panelgrid-blank">
+						<p:outputLabel for="inputUsername" value="Matricule" />
+						<p:inputText id="inputUsername" required="true"
+							value="#{LoginCtrl.userName}"></p:inputText>
+						<p:outputLabel for="inputPassword" value="Mot de passe" />
+						<p:password id="inputPassword" required="true"
+							value="#{LoginCtrl.password}"></p:password>
+						<p:commandButton id="btnLoginId" value="Se connecter"
+							action="#{LoginCtrl.login}" icon="ui-icon-key" update="growl" />
+					</p:panelGrid>
+				</div>
+				<p:watermark for="inputUsername" value="Matricule" id="watermark1" />
+				<p:watermark for="inputPassword" value="Mot de passe" id="watermark2" />
+			</p:panel>
+		</h:form>
+	</div>
+</h:body>
+</html>

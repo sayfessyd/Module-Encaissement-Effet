@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Produit" table="PRODUIT" rowid="rowid">
+		<id name="codPrdPrd" type="java.lang.Long">
+			<column name="COD_PRD_PRD" precision="4" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="libPrdPrd" type="java.lang.String">
+			<column name="LIB_PRD_PRD" length="100" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

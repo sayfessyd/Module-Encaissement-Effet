@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title></title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="content">
+			#{EffetCtrl.lazyModel.setEtatListEffet('R')}
+			#{EffetCtrl.lazyModel.setDateListEffet(LoginCtrl.getActuelle())}
+			<h:form id="form">
+				<div class="exporter">
+					<h:commandLink>
+						<p:graphicImage name="img/excel.png" />
+						<p:dataExporter type="xls" target="effetTable"
+							fileName="BNA_ModuleEE_Liste" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:graphicImage name="img/pdf.png" />
+						<p:dataExporter type="pdf" target="effetTable"
+							fileName="BNA_ModuleEE_Liste" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:graphicImage name="img/csv.png" />
+						<p:dataExporter type="csv" target="effetTable"
+							fileName="BNA_ModuleEE_Liste" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:graphicImage name="img/xml.png" />
+						<p:dataExporter type="xml" target="effetTable"
+							fileName="BNA_ModuleEE_Liste" />
+					</h:commandLink>
+				</div>
+				<h1 class="page-header">
+					<i class="fa fa-file-o"></i> Liste des effets rejetés du jour
+				</h1>
+				<p:dataTable id="effetTable" var="effet"
+					value="#{EffetCtrl.lazyModel}" paginator="true" rows="20"
+					paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}"
+					selectionMode="single" selection="#{EffetCtrl.selectedEffet}"
+					lazy="true" reflow="true" emptyMessage="Aucune données trouvées">
+					<p:ajax event="rowSelect" listener="#{EffetCtrl.onRowSelect}"
+						update=":form:effetDetail" oncomplete="PF('effetDialog').show()" />
+					<p:column headerText="N° effet" sortBy="#{effet.numEff}">
+						<h:outputText value="#{effet.numEff}" />
+					</p:column>
+					<p:column headerText="N° compte client" sortBy="#{effet.contratCpt}">
+						<h:outputText
+							value="#{effet.contratCpt.contratCptId.compteClient}" />
+					</p:column>
+					<p:column headerText="Montant" sortBy="#{effet.mntEff}">
+						<h:outputText value="#{effet.mntEff}" />
+					</p:column>
+					<p:column headerText="Echéance" sortBy="#{effet.datEch}">
+						<h:outputText
+							value="#{LoginCtrl.getDateFormat().format(effet.datEch)}" />
+					</p:column>
+					<p:column headerText="RIB tiré" sortBy="#{effet.ribTir}">
+						<h:outputText value="#{effet.ribTir}" />
+					</p:column>
+					<p:column headerText="Motif rejet" sortBy="#{effet.motifRejet}">
+						<h:outputText value="#{effet.motifRejet.motifRej}" />
+					</p:column>
+				</p:dataTable>
+				<p:dialog header="Details remise" widgetVar="effetDialog"
+					modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+					responsive="true" style="max-width:460px">
+					<div class="ui-fluid">
+						<p:outputPanel id="effetDetail">
+							<p:panelGrid columns="2" layout="grid"
+								styleClass="ui-panelgrid-blank"
+								columnClasses="ui-grid-col-6,ui-grid-col-6"
+								rendered="#{not empty EffetCtrl.selectedEffet}">
+								<h:outputLabel value="Code Etat" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.codEtat}" />
+								<h:outputLabel value="Code Valeur" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.codVal}" />
+								<h:outputLabel value="Code Enregistrement" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.codEnrg}" />
+								<h:outputLabel value="Nom Tiré" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.nomTir}" />
+								<h:outputLabel value="Adresse Tiré" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.adrTir}" />
+								<h:outputLabel value="Date Création" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.datCre}" />
+								<h:outputLabel value="Date Operation" />
+								<h:outputText style="font-style:italic"
+									value="#{EffetCtrl.selectedEffet.datOpe}" />
+							</p:panelGrid>
+						</p:outputPanel>
+					</div>
+				</p:dialog>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

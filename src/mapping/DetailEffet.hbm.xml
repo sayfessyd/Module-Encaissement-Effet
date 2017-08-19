@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.DetailEffet" table="DETAIL_EFFET">
+		<id name="numSeq" type="java.lang.Long">
+			<column name="NUM_SEQ_DET_EFF" not-null="true" precision="20"
+				scale="0" />
+			<generator class="increment" />
+		</id>
+		<many-to-one class="com.pfe.model.ContratCpt" fetch="select"
+			name="contratCpt" lazy="false">
+			<column name="NUM_CCPT_CCPT" precision="6" scale="0" />
+			<column name="COD_CCPT_STRC" precision="3" scale="0" />
+			<column name="COD_CCPT_PRD" precision="4" scale="0" />
+		</many-to-one>
+		<many-to-one name="motifRejet" class="com.pfe.model.MotifRejet"
+			fetch="join" lazy="false">
+			<column name="CODE_REJ" precision="3" scale="0" not-null="false" />
+		</many-to-one>
+		<many-to-one name="globalRemise" class="com.pfe.model.GlobalRemise"
+			fetch="join" lazy="false">
+			<column name="NUM_REM" precision="20" scale="0" not-null="true" />
+		</many-to-one>
+		<property name="numEff" type="java.lang.String">
+			<column length="12" name="NUM_EFF_EFF" />
+		</property>
+		<property name="datOpe" type="java.util.Date">
+			<column length="7" name="DAT_OPE_EFF" />
+		</property>
+		<property name="codVal" type="java.lang.Long">
+			<column name="COD_VAL_EFF" precision="2" scale="0" />
+		</property>
+		<property name="codEnrg" type="java.lang.Long">
+			<column name="COD_ENRG_EFF" precision="2" scale="0" />
+		</property>
+		<property name="codEtat" type="java.lang.String">
+			<column length="1" name="COD_ETAT_EFF" />
+		</property>
+		<property name="mntEff" type="java.lang.Long">
+			<column name="MNT_EFF_EFF" precision="15" scale="0" />
+		</property>
+		<property name="ribTir" type="java.lang.String">
+			<column length="20" name="RIB_TIR_EFF" />
+		</property>
+		<property name="nomTir" type="java.lang.String">
+			<column length="60" name="NOM_TIR_EFF" />
+		</property>
+		<property name="numPres" type="java.lang.Long">
+			<column name="NUM_PRES_EFF" precision="2" scale="0" />
+		</property>
+		<property name="datEch" type="java.util.Date">
+			<column length="10" name="DAT_ECH_EFF" />
+		</property>
+		<property name="datDeliv" type="java.util.Date">
+			<column length="10" name="DAT_DELIV_EFF" />
+		</property>
+		<property name="datRec" type="java.util.Date">
+			<column length="10" name="DAT_REC_EFF" />
+		</property>
+		<property name="datCre" type="java.util.Date">
+			<column length="10" name="DAT_CRE_EFF" />
+		</property>
+		<property name="adrTir" type="java.lang.String">
+			<column length="100" name="ADR_TIR_EFF" />
+		</property>
+	</class>
+</hibernate-mapping>

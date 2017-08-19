@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.ContratCpt" rowid="rowid"
+		table="CONTRAT_CPT">
+		<composite-id class="com.pfe.model.ContratCptId"
+			mapped="false" name="contratCptId" unsaved-value="undefined">
+			<key-property name="numCcptCcpt" type="java.lang.Long">
+				<column name="NUM_CCPT_CCPT" precision="6" scale="0" />
+			</key-property>
+			<key-property name="codStrcStrc" type="java.lang.Long">
+				<column name="COD_STRC_STRC" precision="3" scale="0" />
+			</key-property>
+			<key-property name="codPrdPrd" type="java.lang.Long">
+				<column name="COD_PRD_PRD" precision="4" scale="0" />
+			</key-property>
+		</composite-id>
+		<many-to-one class="com.pfe.model.Personne" fetch="join"
+			name="personne">
+			<column name="NUM_SEQ_PERS" not-null="true" precision="15"
+				scale="0" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.Devise" fetch="join"
+			name="devise" lazy="false">
+			<column name="COD_DEV_DEV" not-null="true" precision="3"
+				scale="0" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.Structure" fetch="join"
+			insert="false" name="structure" update="false">
+			<column name="COD_STRC_STRC" not-null="true" precision="3"
+				scale="0" />
+		</many-to-one>
+		<many-to-one class="com.pfe.model.Produit" fetch="join"
+			insert="false" name="produit" update="false">
+			<column name="COD_PRD_PRD" not-null="true" precision="4"
+				scale="0" />
+		</many-to-one>
+		<set name="effets" table="DETAIL_EFFET" lazy="true" fetch="select">
+            <key>
+                <column name="NUM_CCPT_CCPT" precision="6" scale="0" />
+				<column name="COD_CCPT_STRC" precision="3" scale="0" />
+				<column name="COD_CCPT_PRD" precision="4" scale="0" />
+            </key>
+            <one-to-many class="com.pfe.model.DetailEffet" />
+        </set>
+		<property name="datOuvCcpt" type="java.util.Date">
+			<column length="7" name="DAT_OUV_CCPT" not-null="true" />
+		</property>
+		<property name="codEtatCcpt" type="java.lang.String">
+			<column length="1" name="COD_ETAT_CCPT" not-null="true" />
+		</property>
+		<property name="montSoldCcpt" type="java.lang.Long">
+			<column name="MONT_SOLD_CCPT" precision="15" scale="0" />
+		</property>
+		<property name="datBlocCcpt" type="java.util.Date">
+			<column length="7" name="DAT_BLOC_CCPT" />
+		</property>
+		<property name="datDeblCcpt" type="java.util.Date">
+			<column length="7" name="DAT_DEBL_CCPT" />
+		</property>
+		<property name="datCloCcpt" type="java.util.Date">
+			<column length="7" name="DAT_CLO_CCPT" />
+		</property>
+		<property name="datCtxCcpt" type="java.util.Date">
+			<column length="7" name="DAT_CTX_CCPT" />
+		</property>
+		<property name="nomIntiCcpt" type="java.lang.String">
+			<column length="200" name="NOM_INTI_CCPT" />
+		</property>
+		<property name="montBlocCcpt" type="java.lang.Long">
+			<column name="MONT_BLOC_CCPT" precision="15" scale="0" />
+		</property>
+		<property name="montAutCcpt" type="java.lang.Long">
+			<column name="MONT_AUT_CCPT" precision="15" scale="0" />
+		</property>
+		<property name="montSdevCcpt" type="java.lang.Long">
+			<column name="MONT_SDEV_CCPT" precision="15" scale="0" />
+		</property>
+		<property name="datEautCcpt" type="java.util.Date">
+			<column length="7" name="DAT_EAUT_CCPT" />
+		</property>
+		<property name="montBdevCcpt" type="java.lang.Long">
+			<column name="MONT_BDEV_CCPT" precision="15" scale="0" />
+		</property>
+	</class>
+</hibernate-mapping>

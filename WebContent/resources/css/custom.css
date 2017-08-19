@@ -1,0 +1,96 @@
+html {
+	position: relative;
+	min-height: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	margin-bottom: 60px;
+}
+
+/* body {
+	background-image: url("#{resource['img/sayagata-400px.png']}");
+	background-repeat: repeat;
+	overflow-x: hidden;
+	background-position: 0px 0px;
+}  */
+
+.centeredMenuBar.ui-menubar {
+	min-height: 80px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-top: 0;
+	/* box-shadow: rgba(0, 0, 0, 0.45098) 0 2px 5px 0 !important; */
+}
+
+.centeredMenuBar .ui-menu-list {
+	margin-top: 15px;
+	padding-left: 90px;
+}
+
+.logo {
+	position: fixed;
+	left: 50px;
+	top: 15px;
+	z-index: 10;
+}
+
+@media ( max-width : 767px) {
+	.navbar {
+		display: none;
+	}
+	.nav-small {
+		float: right;
+		width: 40px;
+	}
+	body {
+		padding-top: 0;
+	}
+}
+
+@media ( min-width : 768px) {
+	.nav-small {
+		display: none;
+	}
+}
+
+.sidebar a:focus {
+	outline: 0;
+}
+
+:focus {
+	outline-color: #327e04 !important;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	right: 0;
+	height: 60px;
+	background-color: #F5F3E5;
+}
+
+.container {
+	width: auto;
+	max-width: 680px;
+	padding: 0 15px;
+}
+
+.container .text-muted {
+	margin: 20px 0;
+}
+
+#growl_container {
+	z-index: 1031 !important;
+}
+.page-header{
+	font-size: 30px !important;
+}
+.exporter{
+	float:right;
+}
+.ui-stack{
+	z-index:10;
+}

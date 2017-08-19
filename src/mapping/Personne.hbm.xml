@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Personne" table="PERSONNE"
+		rowid="rowid">
+		<id name="numSeqPers" type="java.lang.Long">
+			<column name="NUM_SEQ_PERS" precision="15" scale="0" />
+			<generator class="increment" />
+		</id>
+		<many-to-one name="typePiece" class="com.pfe.model.TypePiece"
+			fetch="join">
+			<column name="COD_TPCE_TPCE" precision="2" scale="0" not-null="true" />
+		</many-to-one>
+		<property name="numPcePers" type="java.lang.String">
+			<column name="NUM_PCE_PERS" length="15" not-null="true" />
+		</property>
+		<property name="datDlvPers" type="java.util.Date">
+			<column name="DAT_DLV_PERS" length="7" />
+		</property>
+		<property name="libTitrPers" type="java.lang.String">
+			<column name="LIB_TITR_PERS" length="9" />
+		</property>
+		<property name="nomRsPers" type="java.lang.String">
+			<column name="NOM_RS_PERS" length="90" />
+		</property>
+		<property name="libSiglPers" type="java.lang.String">
+			<column name="LIB_SIGL_PERS" length="30" />
+		</property>
+		<property name="nomNomPers" type="java.lang.String">
+			<column name="NOM_NOM_PERS" length="60" />
+		</property>
+		<property name="nomPrnPers" type="java.lang.String">
+			<column name="NOM_PRN_PERS" length="60" />
+		</property>
+		<property name="codSexPers" type="java.lang.String">
+			<column name="COD_SEX_PERS" length="1" />
+		</property>
+		<property name="datNaisPers" type="java.util.Date">
+			<column name="DAT_NAIS_PERS" length="7" />
+		</property>
+		<property name="lieuNaisPers" type="java.lang.String">
+			<column name="LIEU_NAIS_PERS" length="30" />
+		</property>
+		<property name="nomPrnpPers" type="java.lang.String">
+			<column name="NOM_PRNP_PERS" length="60" />
+		</property>
+		<property name="nomNommPers" type="java.lang.String">
+			<column name="NOM_NOMM_PERS" length="60" />
+		</property>
+		<property name="nomPrnmPers" type="java.lang.String">
+			<column name="NOM_PRNM_PERS" length="60" />
+		</property>
+		<property name="numTelPers" type="java.lang.String">
+			<column name="NUM_TEL_PERS" length="15" />
+		</property>
+		<property name="numFaxPers" type="java.lang.String">
+			<column name="NUM_FAX_PERS" length="15" />
+		</property>
+		<property name="adrMailPers" type="java.lang.String">
+			<column name="ADR_MAIL_PERS" length="50" />
+		</property>
+		<property name="adrWebPers" type="java.lang.String">
+			<column name="ADR_WEB_PERS" length="30" />
+		</property>
+		<many-to-one name="adresseResid" class="com.pfe.model.Adresse"
+			fetch="join">
+			<column name="ADR_RES_ID" precision="15" scale="0" />
+		</many-to-one>
+		<many-to-one name="adresseProf" class="com.pfe.model.Adresse"
+			fetch="join">
+			<column name="ADR_PROF" precision="15" scale="0" />
+		</many-to-one>
+	</class>
+</hibernate-mapping>

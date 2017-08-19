@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.GlobalRemise" table="GLOBAL_REMISE">
+		<id name="numRem" type="java.lang.Long">
+			<column name="NUM_REM" not-null="true" precision="20" scale="0" />
+			<generator class="increment" />
+		</id>
+		<property name="montRem" type="java.lang.Long">
+			<column name="MONT_REM" not-null="true" precision="15" scale="0" />
+		</property>
+		<property name="nbrEffRem" type="java.lang.Long">
+			<column name="NBR_EFF_REM" not-null="true" precision="2"
+				scale="0" />
+		</property>
+		<property name="typeRem" type="java.lang.String">
+			<column length="20" name="TYPE_REM" />
+		</property>
+		<property name="datCreRem" type="java.util.Date">
+			<column length="10" name="DAT_CRE_REM" not-null="true" />
+		</property>
+		<property name="etatRem" type="java.lang.String">
+			<column length="20" name="ETAT_REM" />
+		</property>
+		<property name="motifRem" type="java.lang.String">
+			<column length="60" name="MOTIF_REM" />
+		</property>
+	</class>
+</hibernate-mapping>

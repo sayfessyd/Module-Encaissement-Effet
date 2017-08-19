@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Operation" rowid="rowid" table="OPERATION">
+		<id name="codOperOper" type="java.lang.Long">
+			<column name="COD_OPER_OPER" precision="5" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="codTypOper" type="java.lang.String">
+			<column length="1" name="COD_TYP_OPER" />
+		</property>
+		<property name="libOperOper" type="java.lang.String">
+			<column length="100" name="LIB_OPER_OPER" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

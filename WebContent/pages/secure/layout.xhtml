@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>BNA Module EE</title>
+	</f:facet>
+
+	<f:facet name="middle">
+		<link rel="shortcut icon" href="#{resource['img/bna3.png']}" />
+		<h:outputStylesheet name="css/lib/bootstrap.css" />
+		<h:outputStylesheet name="css/lib/font-awesome.css" />
+		<h:outputStylesheet name="css/lib/perfect-scrollbar.min.css" />
+		<h:outputStylesheet name="css/dashboard.css" />
+		<h:outputStylesheet name="css/custom.css" />
+		<h:outputScript name="js/lib/jquery-2.1.4.min.js" />
+		<h:outputScript name="js/lib/perfect-scrollbar.jquery.min.js" />
+		<h:outputScript name="js/custom.js" />
+	</f:facet>
+
+
+</h:head>
+<h:body>
+	<p:growl id="growl" showDetail="true" sticky="true" />
+	<nav class="navbar navbar-fixed-top">
+	<div class="container-fluid">
+		<h:form>
+			<h:graphicImage styleClass="logo" name="img/bna3.png" height="50" />
+			<p:menubar styleClass="centeredMenuBar">
+				<p:menuitem outcome="index.xhtml">
+					<h:graphicImage name="img/home.png" height="20" />
+				</p:menuitem>
+				<p:menuitem outcome="bord.xhtml">
+					<h:graphicImage name="img/portfolio.png" height="20" />
+				</p:menuitem>
+				<p:menuitem outcome="extrait.xhtml">
+					<h:graphicImage name="img/history.png" height="20" />
+				</p:menuitem>
+				<p:menuitem value="Matricule: #{LoginCtrl.userName}"
+					icon="ui-icon-person" />
+				<p:menuitem value="Agence: #{LoginCtrl.codeAgence}"
+					icon="ui-icon-home" />
+				<p:menuitem value="Date comptable: #{LoginCtrl.dateC}"
+					icon="ui-icon-clock" />
+				<p:menuitem value="Date du jour: #{LoginCtrl.dateJ}"
+					icon="ui-icon-clock" />
+				<f:facet name="options">
+					<p:commandButton id="btnLoginId" action="#{LoginCtrl.logout}"
+						icon="fa fa-fw fa-sign-out" />
+				</f:facet>
+			</p:menubar>
+		</h:form>
+	</div>
+	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<h:form>
+					<p:panelMenu style="width:100%">
+						<p:submenu expanded="true" label="Remise des effets">
+							<p:submenu label="Remise effet encaissement"
+								icon="ui-icon-arrowreturnthick-1-e">
+								<p:menuitem value="PEC global remise" outcome="pecg.xhtml"
+									icon="ui-icon-plus" />
+								<p:menuitem value="PEC détail remise" outcome="pecd.xhtml"
+									icon="ui-icon-plus" />
+							</p:submenu>
+							<p:menuitem value="Modification remise encaissement"
+								outcome="modif.xhtml" icon="ui-icon-pencil" />
+							<p:menuitem value="Annulation remise encaissement"
+								outcome="annul.xhtml" icon="ui-icon-cancel" />
+							<p:menuitem value="Validation remise encaissement"
+								outcome="valid.xhtml" icon="ui-icon-check" />
+							<p:menuitem value="Liste des effets validés du jour"
+								outcome="listevj.xhtml" icon="ui-icon-document" />
+						</p:submenu>
+						<p:submenu expanded="true" label="Compensation effets reçus">
+							<p:menuitem value="Toilettage effet" icon="ui-icon-trash" />
+							<p:menuitem
+								value="Traitement des rejets effet liés à la provision"
+								icon="ui-icon-closethick" />
+							<p:menuitem value="Liste des effets rejetés du jour"
+								outcome="listerj.xhtml" icon="ui-icon-document" />
+							<p:menuitem value="Réception sort effet" outcome="sort.xhtml"
+								icon="ui-icon-arrowreturnthick-1-w" />
+							<p:menuitem value="Edition papillon effet impayé encaissement"
+								outcome="editpap.xhtml" icon="ui-icon-document-b" />
+							<p:menuitem value="Délivrance effet impayé au client"
+								outcome="deliv.xhtml" icon="ui-icon-arrowrefresh-1-e" />
+						</p:submenu>
+						<p:separator />
+						<p:submenu label="Opérations diverses">
+							<p:menuitem value="Réclamation effet en conservation"
+								icon="ui-icon-newwin" />
+							<p:menuitem value="Délivrance bon à payer" icon="ui-icon-extlink" />
+							<p:submenu label="Opposition sur effet" icon="ui-icon-locked">
+								<p:menuitem value="Prise en charge opposition effet"
+									icon="ui-icon-arrowreturnthick-1-e" />
+								<p:menuitem value="Pré validation opposition effet"
+									icon="ui-icon-refresh" />
+								<p:menuitem value="Validation opposition effet"
+									icon="ui-icon-check" />
+								<p:menuitem value="Levée d'opposition effet"
+									icon="ui-icon-unlocked" />
+							</p:submenu>
+							<p:menuitem value="Protestation effet impayé"
+								icon="ui-icon-shuffle" />
+							<p:menuitem value="Règlement frais huissier notaire"
+								icon="ui-icon-calculator" />
+						</p:submenu>
+						<p:submenu label="Consultation / Edition">
+							<p:menuitem value="Liste des remises en attentes"
+								outcome="listei.xhtml" icon="ui-icon-document" />
+							<p:menuitem value="Liste des remises validées"
+								outcome="listev.xhtml" icon="ui-icon-document" />
+							<p:menuitem value="Liste des remises annulées"
+								outcome="listea.xhtml" icon="ui-icon-document" />
+							<p:menuitem value="Liste des effets reclamés"
+								icon="ui-icon-document" />
+							<p:menuitem value="Liste des effets reçus"
+								icon="ui-icon-document" />
+							<p:menuitem
+								value="Liste des comissions non perçus sur un compte en devise"
+								icon="ui-icon-document" />
+							<p:menuitem value="Liste des effets rejetés"
+								outcome="lister.xhtml" icon="ui-icon-document" />
+							<p:menuitem value="Liste des BAP" icon="ui-icon-document" />
+							<p:menuitem value="Liste des effets protestés"
+								icon="ui-icon-document" />
+							<p:menuitem
+								value="Liste des effets en opposition/Levée d'opposition"
+								icon="ui-icon-document" />
+							<p:menuitem value="Retenue à la source huissier notaire"
+								icon="ui-icon-arrow-4" />
+						</p:submenu>
+					</p:panelMenu>
+				</h:form>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				<div class="nav-small">
+					<h:form>
+						<p:selectOneMenu id="onemenu" value="#{EffetCtrl.outcome}">
+							<f:selectItem itemLabel="Menu" itemValue="" />
+							<f:selectItem itemLabel="Home" itemValue="index.xhtml" />
+							<f:selectItem itemLabel="Bordereau" itemValue="bord.xhtml" />
+							<f:selectItem itemLabel="Extrait" itemValue="extrait.xhtml" />
+							<f:selectItem itemLabel="PEC global remise"
+								itemValue="pecg.xhtml" />
+							<f:selectItem itemLabel="PEC détail remise"
+								itemValue="pecd.xhtml" />
+							<f:selectItem itemLabel="Modification remise"
+								itemValue="modif.xhtml" />
+							<f:selectItem itemLabel="Annulation remise"
+								itemValue="annul.xhtml" />
+							<f:selectItem itemLabel="Validation remise"
+								itemValue="valid.xhtml" />
+							<f:selectItem itemLabel="Effets validés du jour"
+								itemValue="listevj.xhtml" />
+							<f:selectItem itemLabel="Toilettage effet" />
+							<f:selectItem itemLabel="Traitement rejets" />
+							<f:selectItem itemLabel="Effets rejetés du jour"
+								itemValue="listerj.xhtml" />
+							<f:selectItem itemLabel="Sort effet" itemValue="sort.xhtml" />
+							<f:selectItem itemLabel="Edition papillon"
+								itemValue="editpap.xhtml" />
+							<f:selectItem itemLabel="Délivrance effet"
+								itemValue="deliv.xhtml" />
+							<f:selectItem itemLabel="Réclamation effet" />
+							<f:selectItem itemLabel="Délivrance BAP" />
+							<f:selectItem itemLabel="PEC opposition effet" />
+							<f:selectItem itemLabel="PV opposition effet" />
+							<f:selectItem itemLabel="V opposition effet" />
+							<f:selectItem itemLabel="L opposition effet" />
+							<f:selectItem itemLabel="Protestation effet" />
+							<f:selectItem itemLabel="Règlement frais" />
+							<f:selectItem itemLabel="Remises en attentes"
+								itemValue="listei.xhtml" />
+							<f:selectItem itemLabel="Remises validées"
+								itemValue="listev.xhtml" />
+							<f:selectItem itemLabel="Remises annulées"
+								itemValue="listea.xhtml" />
+							<f:selectItem itemLabel="Effets reclamés" />
+							<f:selectItem itemLabel="Effets reçus" />
+							<f:selectItem itemLabel="Comissions" />
+							<f:selectItem itemLabel="Effets rejetés" itemValue="lister.xhtml" />
+							<f:selectItem itemLabel="Liste BAP" />
+							<f:selectItem itemLabel="Effets protestés" />
+							<f:selectItem itemLabel="Effets en opposition" />
+							<f:selectItem itemLabel="Retenue" />
+							<f:ajax listener="#{EffetCtrl.navigate}" />
+						</p:selectOneMenu>
+					</h:form>
+				</div>
+				<ui:insert name="content">
+					Default
+			    </ui:insert>
+			</div>
+		</div>
+	</div>
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="img/ajaxloadingbar.gif" />
+	</p:dialog>
+	<footer class="footer">
+	<div class="container">
+		<p class="text-muted">Banque Nationale Agricole - Copyright © 2016</p>
+	</div>
+	</footer>
+</h:body>
+</html>

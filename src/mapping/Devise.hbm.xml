@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Devise" table="DEVISE" rowid="rowid">
+		<id name="codDevDev" type="java.lang.Long">
+			<column name="COD_DEV_DEV" precision="3" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="libDevDev" type="java.lang.String">
+			<column name="LIB_DEV_DEV" length="20" not-null="true" />
+		</property>
+		<property name="libFracDev" type="java.lang.String">
+			<column name="LIB_FRAC_DEV" length="20" not-null="true" />
+		</property>
+		<property name="libSiglDev" type="java.lang.String">
+			<column name="LIB_SIGL_DEV" length="3" not-null="true" />
+		</property>
+		<property name="nbrDecDev" type="java.lang.Long">
+			<column name="NBR_DEC_DEV" precision="4" scale="0" not-null="true" />
+		</property>
+		<property name="nbrUnitDev" type="java.lang.Long">
+			<column name="NBR_UNIT_DEV" precision="4" scale="0" not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>

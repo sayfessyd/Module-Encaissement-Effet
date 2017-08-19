@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.Structure" table="STRUCTURE"
+		rowid="rowid">
+		<id name="codStrcStrc" type="java.lang.Long">
+			<column name="COD_STRC_STRC" precision="3" scale="0" />
+			<generator class="assigned" />
+		</id>
+		<property name="libStrcStrc" type="java.lang.String">
+			<column length="120" name="LIB_STRC_STRC" not-null="true" />
+		</property>
+		<property name="codBctStrc" type="java.lang.String">
+			<column length="3" name="COD_BCT_STRC" />
+		</property>
+		<property name="adrImmStrc" type="java.lang.String">
+			<column length="60" name="ADR_IMM_STRC" />
+		</property>
+		<property name="adrRueStrc" type="java.lang.String">
+			<column length="60" name="ADR_RUE_STRC" />
+		</property>
+		<property name="adrCitStrc" type="java.lang.String">
+			<column length="30" name="ADR_CIT_STRC" />
+		</property>
+		<property name="numTelStrc" type="java.lang.String">
+			<column length="30" name="NUM_TEL_STRC" />
+		</property>
+		<property name="numFaxStrc" type="java.lang.Long">
+			<column name="NUM_FAX_STRC" precision="15" scale="0" />
+		</property>
+		<property name="dateJournee" type="java.util.Date">
+			<column name="DAT_JOUR_STRC" />
+		</property>
+	</class>
+</hibernate-mapping>

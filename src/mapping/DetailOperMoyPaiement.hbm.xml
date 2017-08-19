@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.pfe.model.DetailOperMoyPaiement" table="DETAIL_OPER_MOY_PAIEMENT"
+		rowid="rowid">
+		<id name="numCodDomp" type="java.lang.Long">
+			<column name="NUM_COD_DOMP" precision="10" scale="0" />
+			<generator class="native">
+				<param name="sequence">SEQ_DETAIL_OPER_MOYP</param>
+			</generator>
+		</id>
+		<many-to-one name="operationMoyPay" class="com.pfe.model.OperationMoyPay"
+			fetch="join" lazy="false">
+			<column name="NUM_OPER_OMP" length="15" not-null="true" />
+		</many-to-one>
+		<property name="libCommission" type="java.lang.String">
+			<column name="LIB_COM_DOMP" length="60" not-null="false" />
+		</property>
+		<property name="codTypDomp" type="java.lang.String">
+			<column name="COD_TYP_DOMP" length="10" not-null="true" />
+		</property>
+		<property name="montValDomp" type="java.lang.Long">
+			<column name="MONT_VAL_DOMP" precision="15" scale="0"
+				not-null="true" />
+		</property>
+	</class>
+</hibernate-mapping>
