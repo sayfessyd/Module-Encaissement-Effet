@@ -1,4 +1,4 @@
-## Module-Encaissement-Effet
+## Promissory notes manager
 Java EE web application that allows the management of promissory notes.
 ### Technologies
 - Spring Framework 4.3
